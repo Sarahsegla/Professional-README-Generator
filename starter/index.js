@@ -3,6 +3,7 @@ const path = require('path');
 const inquirer = require("inquirer");
 //const generateMarkdownTest = require("./utils/generateMarkdown");
 const { log } = require("console");
+const emailValidator = require('email-validator');
 
 //function
  const generateMarkdownTest = (response) => 
@@ -23,11 +24,12 @@ const { log } = require("console");
         </style>
     </head>
     <body>
-        <div class="jumbotron" style="border: 2px solid black;">
+        <div class="jumbotron" style="background-color: #031325; border: 2px solid black; color: white;" >
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   =
                 </button>
+                <hr class="my-4"> 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                 <div id="title1">
                   <a class="dropdown-item" type="button" href="#title2">${response.Title}</a>
@@ -58,10 +60,10 @@ const { log } = require("console");
                   </div>
                 </div>           
               </div>
-              <h1 class="display-4">README.md</h1>
-              <hr class="my-4">
+              <!-- <h1 class="display-4">README.md</h1>
+              <hr class="my-4"> -->
               <div id="title2">
-          <p> ${response.Title}</p>
+          <h1>${response.Title}</h1>
             <hr class="my-4">
               </div>
               <div id="Description2">
@@ -102,6 +104,8 @@ const { log } = require("console");
         <div id="question2">
             <h2 >Questions</h2>
             <p>${response.Questions}</p>
+            <p>${response.Github}</p>
+            <p>${response.Email}</p>
         </div>
           </div>
           <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -119,7 +123,7 @@ const { log } = require("console");
 inquirer.prompt ([ 
     {
         type: 'input',
-        message: 'Whats the title of you project?',
+        message: 'Whats the title of your project?',
         name: 'Title',
     },
     {
@@ -131,7 +135,6 @@ inquirer.prompt ([
         type: 'input',
         message: 'Whats the table of content?',
         name: 'Table of contents',
-        //find a way to make a table
     },
     {
         type: 'input',
@@ -162,8 +165,32 @@ inquirer.prompt ([
         type: 'input',
         message: 'Any questions?',
         name: 'Questions',
-    },
 
+    },
+    {
+        type: 'input',
+        message: 'GitHub Username',
+        name: 'Github',
+
+    },
+    {
+        type: 'input',
+        message: 'Email Address',
+        name: 'Email',
+        validate: function(email)
+        {
+            valid = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+            // /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2.3})+$/.test(email)
+            if (valid) {
+                console.log(" valid");
+                return true;
+            } else {
+                console.log(" invalid");
+                return false
+            }
+        }
+
+    },
 
 ])
 .then((response) => {
@@ -179,6 +206,7 @@ inquirer.prompt ([
 
 });
 
+//inquirer.prompt.Questions 
  
 
 
