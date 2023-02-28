@@ -104,7 +104,7 @@ const emailValidator = require('email-validator');
         <div id="question2">
             <h2 >Questions</h2>
             <p>${response.Questions}</p>
-            <p>${response.Github}</p>
+            <a href="https://github.com/${response.Github}">${response.Github}</a>
             <p>${response.Email}</p>
         </div>
           </div>
@@ -171,6 +171,8 @@ inquirer.prompt ([
         type: 'input',
         message: 'GitHub Username',
         name: 'Github',
+
+
 
     },
     {
