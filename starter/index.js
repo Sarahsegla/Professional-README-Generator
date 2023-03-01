@@ -146,10 +146,10 @@ inquirer.prompt ([
         name: 'Usage',
     },
     {
-        type: 'checkbox',
+        type: 'input',
         message: 'What are the license used for this project?',
         name: 'License',
-        choices: [ ]
+        
     },
     {
         type: 'input',
