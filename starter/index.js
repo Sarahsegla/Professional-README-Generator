@@ -5,7 +5,7 @@ const inquirer = require("inquirer");
 const { log } = require("console");
 const emailValidator = require('email-validator');
 
-//function
+//function of my html file
  const generateMarkdownTest = (response) => 
     `<!DOCTYPE html>
     <html lang="en">
@@ -115,10 +115,9 @@ const emailValidator = require('email-validator');
     </html>`;
   
 
-//above
 
 
-// array of questions for user
+// object of questions for user
 // const questions = () => 
 inquirer.prompt ([ 
     {
@@ -147,9 +146,10 @@ inquirer.prompt ([
         name: 'Usage',
     },
     {
-        type: 'input',
+        type: 'checkbox',
         message: 'What are the license used for this project?',
         name: 'License',
+        choices: [ ]
     },
     {
         type: 'input',
@@ -181,8 +181,9 @@ inquirer.prompt ([
         name: 'Email',
         validate: function(email)
         {
+            // variable that contains email validation code
             valid = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-            // /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2.3})+$/.test(email)
+// conditions for results
             if (valid) {
                 console.log(" valid");
                 return true;
@@ -200,9 +201,8 @@ inquirer.prompt ([
     console.log(response);
 
     const HTMLtest = generateMarkdownTest(response);
-
+//using fs to makr html file and conditions if successful or not
     fs.writeFile(`index.html`, HTMLtest, (error) =>
-    //fs.writeFile(`test.json`, JSON.stringify(response), (error) =>
     error ? console.error(error) : console.log("well done!")
     );
 
